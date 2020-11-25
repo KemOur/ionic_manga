@@ -1,23 +1,14 @@
-/*
-document.querySelector('#').addEventListener('input', function () {
-let url = "https://api.jikan.moe/v3/search/anime?q=${search.value}"
-    fetch(url).then((response) =>{
-        response.json().then((data)=>{
-            console.log(data)
-        })
-    })
-})
-
-*/
-
 let form = document.querySelector('#form')
 let search = document.querySelector('#search')
 
-let select = document.querySelector('#select')
-let manga = document.querySelector('#manga')
-let anime = document.querySelector('#anime')
-let personne = document.querySelector('#personne')
-let personnage = document.querySelector('#personnage')
+const selectElement = document.querySelector('#select');
+
+selectElement.addEventListener('change', (event) => {
+    const result = document.querySelector('#list');
+    //result.textContent = `t'as sélectionné: ${event.target.value}`;
+    //console.log(event.target.value)
+    let type = event.target.value;
+    console.log(type)// affichage du type: anime, manga ou person
 
 
 form.addEventListener("submit",  (event)=> {
@@ -25,32 +16,74 @@ form.addEventListener("submit",  (event)=> {
     event.preventDefault();
             axios
                 .get(
-                    `https://api.jikan.moe/v3/search/anime?q=${search.value}`
+                    `https://api.jikan.moe/v3/search/${type}?q=${search.value}`
                 ).then((response) => {
                 console.log(response.data)
                 let data = response.data.results
                 //console.log(data[0].title)
                 //console.log(data)
                 for(const manga of data) {
+                    if (type === "anime"){
                     //console.log(manga.title)
                     let div = document.createElement("div");
                     //ma condition pour afficher soit un dessin animé soît une personnage ou autre!
-                    div.innerHTML = `<ion-card>
+                    div.innerHTML = `
+                                <ion-card>
                                     <img src="${manga.image_url}" style="width: 100%"/>
                                     <ion-card-header>
-                                        <ion-card-subtitle>
-                                        <a target="_blank" href="${manga.episodes}"></a>
-                                        </ion-card-subtitle>
                                         <ion-card-title>${manga.title}</ion-card-title>
-                                    </ion-card-header>
-                                    <ion-card-content>
+                                                <ion-item>
+                                                  <ion-label>Épisodes</ion-label>
+                                                  <ion-badge color="dark" slot="end">
+                                                    ${manga.episodes}
+                                                    </ion-badge>
+                                                 </ion-item>
+                                              </ion-card-header>
+                                            <a target="_blank" href="${manga.url}"/>
+                                            <ion-card-content>
                                         ${manga.synopsis}
                                     </ion-card-content>
                                 </ion-card>`;
                     let list = document.querySelector("#list");
                     list.append(div);
 
+                } else if (type === "person") {
+                        console.log('person')
+                        let div = document.createElement("div");
+                        //ma condition pour afficher soit un dessin animé soît une personnage ou autre!
+                        div.innerHTML = `<ion-item>
+                                            <ion-avatar slot="start">
+                                            <img src="${manga.image_url}"/>
+                                              </ion-avatar>
+                                              <ion-label>
+                                                <ion-card-title>${manga.name}</ion-card-title>
+                                                <ion-card-title>${manga.alternative_names}</ion-card-title>
+                                              </ion-label>
+                                            </ion-item>`;
+                        let list = document.querySelector("#list");
+                        list.append(div);
+                    }else if (type === "manga") {
+                        console.log('manga')
+                        let div = document.createElement("div");
+                        //ma condition pour afficher soit un dessin animé soît une personnage ou autre!
+                        div.innerHTML = `<ion-card>
+                                            <img src="${manga.image_url}" style="width: 100%"/>
+                                            <ion-card-header>
+                                                <ion-item>   
+                                                <ion-label>Volumes</ion-label>
+                                                <ion-badge color="success">${manga.volumes}</ion-badge>
+                                                 </ion-item>                                     
+                                                <ion-card-title>${manga.title}</ion-card-title>
+                                                </ion-card-header>
+                                                <a target="_blank" href="${manga.url}"/>
+                                                <ion-card-content>
+                                                ${manga.synopsis}
+                                            </ion-card-content>
+                                        </ion-card>`;
+                        let list = document.querySelector("#list");
+                        list.append(div);
+                    }
                 }
-
-     })
-     })
+            })
+        })
+    })

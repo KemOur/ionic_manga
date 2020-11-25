@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" >
 <head>
     <meta charset="UTF-8">
     <meta name="viewport"
@@ -18,8 +18,8 @@
 
 <ion-app>
     <ion-header translucent>
-        <ion-toolbar>
-            <ion-title>Ionic-Evaluation</ion-title>
+        <ion-toolbar color="dark">
+            <ion-title style="text-align: center">Ionic-Japon</ion-title>
         </ion-toolbar>
     </ion-header>
 
@@ -29,24 +29,25 @@
 
     <ion-item>
         <ion-label>Type</ion-label>
-
-        <ion-select interface="popover" id="select">
-            <ion-select-option id="anime" value="anime">Animés</ion-select-option>
-            <ion-select-option id="manga" value="manga">Mangas</ion-select-option>
-            <ion-select-option id="personne" value="personne">Personnes</ion-select-option>
-            <ion-select-option id="personnage" value="personnage">Personnages</ion-select-option>
-        </ion-select>
+            <select
+                    id="select"
+                    name="">
+                <option>Sélectionnez …</option>
+                <option value="anime">Animé</option>
+                <option value="manga">Manga</option>
+                <option value="person">personnes</option>
+            </select>
     </ion-item>
     <form id="form">
         <ion-footer>
-            <ion-toolbar>
+            <ion-toolbar color="light">
                 <ion-searchbar
                         id="search"
                         show-cancel-button="never"
                         placeholder="..."
                         class="search">
                 </ion-searchbar>
-                <ion-button expand="full" type="submit" color="secondary">Rechercher</ion-button>
+                <ion-button expand="full" type="submit" color="dark">Rechercher</ion-button>
             </ion-toolbar>
         </ion-footer>
     </form>
