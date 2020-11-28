@@ -10,7 +10,8 @@
     <script type="module" src="https://cdn.jsdelivr.net/npm/@ionic/core/dist/ionic/ionic.esm.js"></script>
     <script nomodule src="https://cdn.jsdelivr.net/npm/@ionic/core/dist/ionic/ionic.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@ionic/core/css/ionic.bundle.css"/>
-    <title>Document</title>
+    <title>Ionic-Japon</title>
+    <link rel="icon" href="img/fooo.gif">
     <script src="https://unpkg.com/axios/dist/axios.min.js" defer></script>
     <link rel="stylesheet" href="css/app.css">
 </head>
@@ -21,6 +22,7 @@
         <ion-toolbar color="dark">
             <ion-title style="text-align: center">Ionic-Japon</ion-title>
         </ion-toolbar>
+        <div class="error" style="display: none"></div>
     </ion-header>
 
     <ion-content fullscreen id="list">
@@ -29,13 +31,12 @@
 
     <ion-item>
         <ion-label>Type</ion-label>
-            <select
-                    id="select"
-                    name="">
-                <option>Sélectionnez …</option>
+            <select id="select">
+                <option>Veuillez selectionner un type</option>
                 <option value="anime">Animé</option>
                 <option value="manga">Manga</option>
                 <option value="person">personnes</option>
+                <option value="character">personnages</option>
             </select>
     </ion-item>
     <form id="form">
